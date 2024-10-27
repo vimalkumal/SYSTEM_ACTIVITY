@@ -1,0 +1,95 @@
+
+{% extends 'activity/main.html'%}
+{%block content%}
+<style>
+    .form-group{
+        margin-bottom: 10px;
+    }
+</style>
+<h4>Activity Master Add</h4>
+<div class="container">
+    <div class="row">
+        <!-- <div class="col"></div> -->
+        <div class="col">
+            
+            <form action="{%url 'activityMaster'%}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="inputActivityMasterName" class="col-sm-5 col-form-label" >Actvity Master</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityMasterName" aria-describedby="activityMasterNameHelp" placeholder="" name="inputActivityMasterName">
+                        <small id="activityMasterNameHelp" class="form-text text-muted"> </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityMasterCode" class="col-sm-5 col-form-label" >Actvity Master Code</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityMasterCode" aria-describedby="activityMasterCodeHelp" placeholder="" name="inputActivityMasterCode">
+                        <small id="activityMasterCodeHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityConfig" class="col-sm-5 col-form-label" >Actvity Config</label>
+                    <div class="col-sm-7">
+                        <textarea class="form-control" id="inputActivityConfig" aria-describedby="activityConfigHelp" 
+                        placeholder="" name="inputActivityConfig" cols="20" rows="10"></textarea>
+                        <small id="activityConfigHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputActivityMasterStatus" class="col-sm-5 col-form-label" >Actvity Status</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityMasterStatus" aria-describedby="activityMasterStatusHelp" placeholder="" name="inputActivityMasterStatus" >
+                            <option value="Active" selected>Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                        
+                        <small id="activityMasterStatusHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-7">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+<!-- 
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit">
+</form> -->
+
+<hr>
+<h4>Activity Master Listing</h4>
+<table class="table">
+    <tr>
+        <th>Activity Master</th>
+        <th>Activity Master Code</th>
+        <th>Configration</th>
+        <th>Status</th>
+        <th>Added date</th>
+        <th>Updated date</th>
+    </tr>
+    {% for am in amListing %}
+        <tr>
+            <td>{{am.cActivityMasterName}}</td>
+            <td>{{am.cActivityMasterCode}}</td>
+            <td>{{am.tActivityConfig}}</td>
+            <td>{{am.dAddedDate}}</td>
+            <td>{{am.dUpdatedDate}}</td>
+            <td>{{am.eStatus}}</td>
+        </tr>
+        
+    {%endfor%}
+</table>
+
+
+{%endblock%}

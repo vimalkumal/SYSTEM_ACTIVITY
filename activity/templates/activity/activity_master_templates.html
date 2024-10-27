@@ -1,0 +1,93 @@
+
+{% extends 'activity/main.html'%}
+{%block content%}
+<style>
+    .form-group{
+        margin-bottom: 10px;
+    }
+</style>
+<h4>Activity Master Template Add</h4>
+
+<div class="container">
+    <div class="row">
+        <!-- <div class="col"></div> -->
+        <div class="col">
+            
+            <!--
+             
+             -->
+
+            <form action="{%url 'activityTemplates'%}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="inputActivityMasterId" class="col-sm-5 col-form-label" >Actvity Master</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityMasterId" aria-describedby="activityMasterIdHelp" placeholder="" name="inputActivityMasterId" >
+                            <!-- <option value="" selected >Select activity master</option> -->
+                            {% for activity_master in form.fields.iActivityMasterID.queryset %}
+                                
+                                <option value="{{ activity_master.iActivityMasterId }}" {% if form.iActivityMasterID.value == activity_master.iActivityMasterID %}selected{% endif %}>
+                                    {{ activity_master.cActivityMasterName }}
+                                </option>
+                            {% endfor %} 
+                        </select>
+                        <small id="activityMasterIdHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityTemplate" class="col-sm-5 col-form-label" >Actvity Template</label>
+                    <div class="col-sm-7">
+                        <textarea class="form-control" id="inputActivityTemplate" aria-describedby="activityTemplateHelp" 
+                        placeholder="" name="inputActivityTemplate" cols="20" rows="2"></textarea>
+                        <small id="activityTemplateHelp" class="form-text text-muted"> </small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputActivityTemplateLng" class="col-sm-5 col-form-label" >Actvity Language</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityTemplateLng" aria-describedby="activityTemplateLngHelp" placeholder="" name="inputActivityTemplateLng" >
+                            {% for value, label in form.fields.eLanguage.choices %}
+                            <option value="{{ value }}" {% if form.eLanguage.value == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <small id="activityTemplateLngHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-7">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<!-- <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit">
+</form> -->
+
+<hr>
+<h4>Activity Mastertemplate Listing</h4>
+<table class="table">
+    <tr>
+        <!-- <th>Activity</th> -->
+        <th>Template</th>
+        <th>Language</th>
+    </tr>
+    {% for amt in amtListing %}
+        <tr>
+            
+            <td>{{amt.tActivityTempalte}}</td>
+            <td>{{amt.eLanguage}}</td>
+        </tr>
+        
+    {%endfor%}
+</table>
+{%endblock%}

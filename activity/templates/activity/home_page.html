@@ -1,0 +1,21 @@
+{%extends 'activity/main.html'%}
+
+{%block content%}
+<H1>Welcome to activity system.</H1>
+<hr>
+<h4>Activity Listing</h4>
+<table class="table">
+    <tr>
+        <th>Title</th>
+       
+    </tr>
+    {% for ad in activity_data %}
+    <tr>
+        <td>{{ad.message}}</td>
+    </tr>
+{%endfor%}
+</table>
+
+
+
+{%endblock%}
