@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import activityTypeMaster,activityMaster,activityMasterTemplate,activities
+from django import forms
 
 class ActivityTypeMasterForm(ModelForm):
     class Meta:

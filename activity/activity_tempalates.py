@@ -21,20 +21,22 @@ class activityTemplates():
 
         params_str = activity_obj.tActivityParams
         templates = activity_master_template.tActivityTempalte
-        new_templates =''
+        new_templates = templates
         params_array = json.loads(params_str)
         # print(params_array)
+        # print(templates)
         # print(params_array['USER_NAME'])
         for dict in params_array:
             serch_key = '#'+dict+'#'
             # print(dict)
             if serch_key in templates:
-                new_templates = templates.replace(serch_key,params_array[dict])
-        
+                new_templates = new_templates.replace(serch_key,params_array[dict])
+                # print(new_templates)
 
         activity_context = {
             'message':new_templates
         }
+        # exit()
 
 
         # print(new_templates)

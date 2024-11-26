@@ -6,24 +6,18 @@
         margin-bottom: 10px;
     }
 </style>
-<h4>Activity Master Template Add</h4>
 
+<!-- <h4>Activity Master Template Add</h4>
 <div class="container">
     <div class="row">
-        <!-- <div class="col"></div> -->
         <div class="col">
-            
-            <!--
-             
-             -->
-
             <form action="{%url 'activityTemplates'%}" method="post">
                 {% csrf_token %}
                 <div class="form-group row">
                     <label for="inputActivityMasterId" class="col-sm-5 col-form-label" >Actvity Master</label>
                     <div class="col-sm-7">
                         <select class="form-select" id="inputActivityMasterId" aria-describedby="activityMasterIdHelp" placeholder="" name="inputActivityMasterId" >
-                            <!-- <option value="" selected >Select activity master</option> -->
+                            
                             {% for activity_master in form.fields.iActivityMasterID.queryset %}
                                 
                                 <option value="{{ activity_master.iActivityMasterId }}" {% if form.iActivityMasterID.value == activity_master.iActivityMasterID %}selected{% endif %}>
@@ -61,11 +55,11 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </div>
-            </form>
+            </form> 
         </div>
         <div class="col"></div>
     </div>
-</div>
+</div> -->
 
 <!-- <form method="post">
     {% csrf_token %}
@@ -73,21 +67,46 @@
     <input type="submit" name="Submit">
 </form> -->
 
-<hr>
-<h4>Activity Mastertemplate Listing</h4>
-<table class="table">
-    <tr>
-        <!-- <th>Activity</th> -->
-        <th>Template</th>
-        <th>Language</th>
-    </tr>
-    {% for amt in amtListing %}
-        <tr>
-            
-            <td>{{amt.tActivityTempalte}}</td>
-            <td>{{amt.eLanguage}}</td>
-        </tr>
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title">Activity Template Listing</div>
+            </div>
+            <div class="strip-right">
+                <div class="strip-action-button">
+                    <a href="{% url 'activityMasterTemplatesAdd'%}" class="btn btn-primary btn-sm strip-button">Add Activity Template</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
         
-    {%endfor%}
-</table>
+            <table class="table">
+                <tr>
+                    <!-- <th>Activity</th> -->
+                    <th>Template</th>
+                    <th>Activity Master</th>
+                    <th>Language</th>
+                    <th>Action</th>
+                </tr>
+                {% for amt in amtListing %}
+                    <tr>
+                        <td>{{amt.tActivityTempalte}}</td>
+                        <td>{{amt.iActivityMasterID}}</td>
+                        <td>{{amt.eLanguage}}</td>
+                        <td>
+                            <a href="{% url 'activityMasterTemplatesEdit' amt.pk%}" >Update</a>
+                        </td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</div>
 {%endblock%}

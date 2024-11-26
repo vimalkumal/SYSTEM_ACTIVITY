@@ -1,0 +1,88 @@
+{% extends 'activity/main.html'%}
+{%block content%}
+<style>
+    .form-group{
+        margin-bottom: 10px;
+    }
+ 
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title"> {% if instance %}Edit{% else %}Add{% endif %}  Activity Master</div>
+            </div>
+            <div class="strip-right">
+                <div class="back-button">
+                    
+                    <a href="{% url 'activityMaster'%}" class="btn btn-primary btn-sm strip-button">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+            <form action="{% if instance %}{% url 'activityTypeEdit' pk=instance.pk %}{% else %}{% url 'activityTypeAdd' %}{% endif %}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="inputActivityMasterName" class="col-sm-5 col-form-label" >Actvity Master</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityMasterName" aria-describedby="activityMasterNameHelp" 
+                        placeholder="" name="inputActivityMasterName" value="{{ instance.cActivityMasterName|default:'' }}">
+                        <small id="activityMasterNameHelp" class="form-text text-muted"> </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityMasterCode" class="col-sm-5 col-form-label" >Actvity Master Code</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityMasterCode" aria-describedby="activityMasterCodeHelp" 
+                        placeholder="" name="inputActivityMasterCode" value="{{ instance.cActivityMasterCode|default:'' }}">
+                        <small id="activityMasterCodeHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityConfig" class="col-sm-5 col-form-label" >Actvity Config</label>
+                    <div class="col-sm-7">
+                        <textarea class="form-control" id="inputActivityConfig" aria-describedby="activityConfigHelp" 
+                        placeholder="" name="inputActivityConfig" cols="20" rows="10">{{ instance.tActivityConfig|default:'' }}</textarea>
+                        <small id="activityConfigHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputActivityMasterStatus" class="col-sm-5 col-form-label" >Actvity Status</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityMasterStatus" aria-describedby="activityMasterStatusHelp" placeholder="" name="inputActivityMasterStatus" >
+                            <option value="Active"  {% if instance and instance.eStatus == "Active" %}selected{% endif %}>Active</option>
+                            <option value="Inactive"  {% if instance and instance.eStatus == "Inactive" %}selected{% endif %}>Inactive</option>
+                        </select>
+                        
+                        <small id="activityMasterStatusHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-7">
+                      <button type="submit" class="btn btn-primary">{% if instance %}Edit{% else %}Add{% endif %}</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+ <!-- <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit">
+</form>  -->
+
+
+
+{%endblock%}

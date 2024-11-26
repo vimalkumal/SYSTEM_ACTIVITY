@@ -6,13 +6,12 @@
         margin-bottom: 10px;
     }
 </style>
-<h4>Activity Master Add</h4>
+<!-- <h4>Activity Master Add</h4> -->
 <div class="container">
     <div class="row">
         <!-- <div class="col"></div> -->
         <div class="col">
-            
-            <form action="{%url 'activityMaster'%}" method="post">
+            <!-- <form action="{%url 'activityMaster'%}" method="post">
                 {% csrf_token %}
                 <div class="form-group row">
                     <label for="inputActivityMasterName" class="col-sm-5 col-form-label" >Actvity Master</label>
@@ -55,7 +54,7 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </div>
-            </form>
+            </form> -->
         </div>
         <div class="col"></div>
     </div>
@@ -66,30 +65,60 @@
     {{form.as_p}}
     <input type="submit" name="Submit">
 </form> -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title">Activity Master Listing</div>
+            </div>
+            <div class="strip-right">
+                <div class="strip-action-button">
+                    <a href="{% url 'activityMasterAdd'%}" class="btn btn-primary btn-sm strip-button">Add Activity Master</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
 
-<hr>
-<h4>Activity Master Listing</h4>
+        
 <table class="table">
     <tr>
         <th>Activity Master</th>
         <th>Activity Master Code</th>
         <th>Configration</th>
         <th>Status</th>
-        <th>Added date</th>
         <th>Updated date</th>
+        <th>Action</th>
     </tr>
-    {% for am in amListing %}
-        <tr>
-            <td>{{am.cActivityMasterName}}</td>
-            <td>{{am.cActivityMasterCode}}</td>
-            <td>{{am.tActivityConfig}}</td>
-            <td>{{am.dAddedDate}}</td>
-            <td>{{am.dUpdatedDate}}</td>
-            <td>{{am.eStatus}}</td>
-        </tr>
+    {%if amListing %}
+        {% for am in amListing %}
+            <tr>
+                <td>{{am.cActivityMasterName}}</td>
+                <td>{{am.cActivityMasterCode}}</td>
+                <td>{{am.tActivityConfig}}</td>
+                <td>{{am.eStatus}}</td>
+                <td>{{am.dUpdatedDate}}</td>
+                <td>
+                    <a href="{% url 'activityMasterEdit' am.pk %}">Update</a>
+                </td>
+            </tr>
         
-    {%endfor%}
+        {%endfor%}
+    {%else%}
+            <tr>
+                <td colspan="7">
+                    <div class="table-data-not-found">
+                        No Data Found!!
+                    </div>
+                </td>
+            </tr>
+    {%endif%}
 </table>
 
-
+</div>
+</div>
+</div>
 {%endblock%}

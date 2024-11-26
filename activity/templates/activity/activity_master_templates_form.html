@@ -1,0 +1,100 @@
+
+{% extends 'activity/main.html'%}
+{%block content%}
+<style>
+    .form-group{
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title"> {% if instance %}Edit{% else %}Add{% endif %}  Activity Template</div>
+            </div>
+            <div class="strip-right">
+                <div class="back-button">
+                    
+                    <a href="{% url 'activityTemplates'%}" class="btn btn-primary btn-sm strip-button">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+            <form action="{% if instance %}{% url 'activityMasterTemplatesEdit' pk=instance.pk %}{% else %}{% url 'activityMasterTemplatesAdd' %}{% endif %}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="inputActivityMasterId" class="col-sm-5 col-form-label" >Actvity Master</label>
+                    <div class="col-sm-7">
+
+                       
+                        
+                         
+                        <select class="form-select" id="inputActivityMasterId" aria-describedby="activityMasterIdHelp" placeholder="" name="inputActivityMasterId" >
+                            <!-- <option value="" selected >Select activity master</option> -->
+                                                        
+                            {% for activity_master in form.fields.iActivityMasterID.queryset %}
+                            <!-- {% if instance and instance.eStatus == "Active" %}selected{% endif %} -->
+
+
+                                <option 
+                                    value="{{ activity_master.iActivityMasterId }}" 
+                                    {% if instance.iActivityMasterID.pk == activity_master.pk %}selected{% endif %}
+                                >
+                                    {{ activity_master.cActivityMasterName }}
+                                </option>
+                            {% endfor %} 
+                        </select>
+                        <small id="activityMasterIdHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityTemplate" class="col-sm-5 col-form-label" >Actvity Template</label>
+                    <div class="col-sm-7">
+                        
+                        <textarea class="form-control" id="inputActivityTemplate" aria-describedby="activityTemplateHelp" 
+                        placeholder="" name="inputActivityTemplate" cols="20" rows="2">{{ instance.tActivityTempalte|default:'' }}</textarea>
+                        <small id="activityTemplateHelp" class="form-text text-muted"> </small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputActivityTemplateLng" class="col-sm-5 col-form-label" >Actvity Language</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityTemplateLng" aria-describedby="activityTemplateLngHelp" placeholder="" name="inputActivityTemplateLng" >
+                            {% for value, label in form.fields.eLanguage.choices %}
+                            <option value="{{ value }}" {% if instance.eLanguage == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                        <small id="activityTemplateLngHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-7">
+                      <button type="submit" class="btn btn-primary">
+                        {% if instance %}Edit{% else %}Add{% endif %}
+                      </button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<!-- <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit">
+</form> -->
+
+
+
+{%endblock%}

@@ -1,0 +1,31 @@
+.page-strip {
+    background: #cfd8dc;
+    color: #000;
+    margin: 5px 0px 5px 0px;
+    padding: 2px 0 2px 0;
+    height: 35px;
+}
+.strip-title {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 2px 0px 0px 10px;
+}
+
+.strip-right {
+    float: right;
+    display: flex;
+    margin:0px 3px ;
+
+}
+
+.strip-left {
+    position: absolute;
+}
+.back-button{
+    margin: 0px 2px 2px 0px;
+}
+
+.table-data-not-found{
+    text-align: center;
+    font-size: 15px;
+}

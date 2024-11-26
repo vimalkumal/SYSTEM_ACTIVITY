@@ -1,0 +1,95 @@
+{% extends 'activity/main.html'%}
+{%block content%}
+<style>
+    .form-group{
+        margin-bottom: 10px;
+    }
+ 
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title"> {% if instance %}Edit{% else %}Add{% endif %}  Activity Typemaster</div>
+            </div>
+            <div class="strip-right">
+                <div class="back-button">
+                    <a href="{% url 'activityType'%}" class="btn btn-primary btn-sm strip-button">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- OLD : START -->
+<!-- <div class="row page-strip">
+    <div class="col-11">
+        <div class="strip-title">
+            {% if instance %}Edit{% else %}Add{% endif %}  Activity Typemaster
+        </div>
+    </div>
+    <div class="col-1">
+        <span class="strip-action-button">
+            <a href="{%url 'activityType' %}">Back</a>
+        </span>
+
+    </div>
+</div> -->
+<!-- OLD : END -->
+<div class="container">
+    <div class="row">
+        <!-- <div class="col"></div> -->
+        <div class="col">
+            
+            <form action="{% if instance %}{% url 'activityTypeEdit' pk=instance.pk %}{% else %}{% url 'activityTypeAdd' %}{% endif %}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="inputActivityTypeName" class="col-sm-5 col-form-label" >Actvity Type</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityTypeName" aria-describedby="activityTypeNameHelp" placeholder="" name="inputActivityTypeName"
+                        value="{{ instance.cActivityType|default:'' }}" >
+                        <small id="activityTypeNameHelp" class="form-text text-muted"> </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputActivityTypeCode" class="col-sm-5 col-form-label" >Actvity Type Code</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputActivityTypeCode" aria-describedby="activityTypeCodeHelp" placeholder="" 
+                        name="inputActivityTypeCode" value="{{ instance.cActivityCode|default:'' }}" >
+                        <small id="activityTypeCodeHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputActivityTypeStatus" class="col-sm-5 col-form-label" >Status</label>
+                    <div class="col-sm-7">
+                        <select class="form-select" id="inputActivityTypeStatus" aria-describedby="activityTypeStatusHelp" placeholder="" name="inputActivityTypeStatus" >
+                            <option value="Active" {% if instance and instance.eStatus == "Active" %}selected{% endif %}>Active</option>
+                            <option value="Inactive" {% if instance and instance.eStatus == "Inactive" %}selected{% endif %}>Inactive</option>
+                        </select>
+                        
+                        <small id="activityTypeStatusHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-7">
+                      <button type="submit" class="btn btn-primary">{% if instance %}Edit{% else %}Add{% endif %} Activity</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+ <!-- <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit">
+</form>  -->
+
+
+
+{%endblock%}

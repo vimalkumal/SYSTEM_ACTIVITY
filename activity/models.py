@@ -27,12 +27,12 @@ class activityMaster(models.Model):
 
 class activityMasterTemplate(models.Model):
     
-    LANGUAGE = (("en","en"), ("fr","fr"))
+    LANGUAGE = (("en","En"), ("fr","Fr"))
 
-    iActivityMasterTemplateID = models.AutoField(primary_key=True)
-    iActivityMasterID       = models.ForeignKey(activityMaster,to_field='iActivityMasterId',on_delete=models.CASCADE)
-    tActivityTempalte       = models.TextField(null=True)
-    eLanguage               = models.CharField(max_length=216,choices=LANGUAGE,default='en')
+    iActivityMasterTemplateID   = models.AutoField(primary_key=True)
+    iActivityMasterID           = models.ForeignKey(activityMaster,to_field='iActivityMasterId',on_delete=models.CASCADE)
+    tActivityTempalte           = models.TextField(null=True)
+    eLanguage                   = models.CharField(max_length=216,choices=LANGUAGE,default='en')
 
     def __str__(self):
         return str(self.iActivityMasterTemplateID)
@@ -94,9 +94,11 @@ def addActivityEntitity(sender,instance,created,**kwatgs):
         for entity_item in activity_master_entity:
             entity_val      = str(entity_item['entity'])
             entity_field    = entity_item['entity_key']
-            
-
+            # print(activity_params[entity_field])
             if(int(activity_params[entity_field])>0):
+                # print("call")
+                # print(entity_val)
+                # print(activity_params[entity_field])
             # insert data in activity entity
                 newActivityEntity = activityEntity(
                     iActivitiesId       = instance,

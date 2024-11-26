@@ -4,11 +4,12 @@
     .form-group{
         margin-bottom: 10px;
     }
+    
 </style>
-<h4>Activity Typemaster Add</h4>
+<!-- <h4>Activity Typemaster Add</h4>
 <div class="container">
     <div class="row">
-        <!-- <div class="col"></div> -->
+        
         <div class="col">
             
             <form action="{%url 'activityType'%}" method="post">
@@ -49,31 +50,51 @@
         </div>
         <div class="col"></div>
     </div>
-</div>
-
+</div> -->
  <!-- <form method="post">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" name="Submit">
 </form>  -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title">Activity Type Listing</div>
+            </div>
+            <div class="strip-right">
+                <div class="strip-action-button">
+                    <a href="{% url 'activityTypeAdd'%}" class="btn btn-primary btn-sm strip-button">Add Activity Type</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<hr>
-<h4>Activity Typemaster Listing</h4>
-<table class="table">
-    <tr>
-        <th>Activity Type</th>
-        <th>Code</th>
-        <th>Status</th>
-    </tr>
-    {% for atm in atm_listing %}
-        <tr>
-            <td>{{atm.cActivityType}}</td>
-            <td>{{atm.cActivityCode}}</td>
-            <td>{{atm.eStatus}}</td>
-        </tr>
-        
-    {%endfor%}
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-12">        
+            <table class="table">
+                <tr>
+                    <th>Activity Type</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                {% for atm in atm_listing %}
+                    <tr>
+                        <td>{{atm.cActivityType}}</td>
+                        <td>{{atm.cActivityCode}}</td>
+                        <td>{{atm.eStatus}}</td>
+                        <td>
+                            <a href="{%  url 'activityTypeEdit' atm.pk %}">Update</a>
 
-
+                        </td>
+                    </tr>
+                    
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</div>
 {%endblock%}

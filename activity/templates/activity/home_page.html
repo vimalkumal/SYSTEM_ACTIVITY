@@ -6,14 +6,20 @@
 <h4>Activity Listing</h4>
 <table class="table">
     <tr>
-        <th>Title</th>
-       
+        <th>Activity Title Title</th>
     </tr>
-    {% for ad in activity_data %}
-    <tr>
-        <td>{{ad.message}}</td>
-    </tr>
-{%endfor%}
+    {%if activity_data%}
+        {% for ad in activity_data %}
+        <tr>
+            <td>{{ad.message}}</td>
+        </tr>
+        {%endfor%}
+    {%else%}
+        <tr>
+            <td>No Data Found for Activites!!</td>
+        </tr>
+    {%endif%}
+    
 </table>
 
 

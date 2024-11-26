@@ -1,12 +1,29 @@
 {% extends 'activity/main.html'%}
 
 {%block content%}
-<hr>
-<h3>Activity Add</h3>
-<hr>
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Add">
-</form>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-strip">
+            <div class="strip-left">
+                <div class="strip-title"> Activity Add</div>
+            </div>
+            <div class="strip-right">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</div>
+
 {%endblock%}
