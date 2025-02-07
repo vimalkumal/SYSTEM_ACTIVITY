@@ -1,11 +1,18 @@
 
+
 {% extends 'activity/main.html'%}
+{% load static %}
+{%block customeJs%}
+    <script src="{% static '/js/activity/activity_master.js' %}"></script>
+{%endblock customeJs%}
 {%block content%}
 <style>
     .form-group{
         margin-bottom: 10px;
     }
 </style>
+
+
 <!-- <h4>Activity Master Add</h4> -->
 <div class="container">
     <div class="row">
@@ -84,7 +91,8 @@
         <div class="col-12">
 
         
-<table class="table">
+<table class="table" id="activity-maste-table">
+    <thead>
     <tr>
         <th>Activity Master</th>
         <th>Activity Master Code</th>
@@ -93,6 +101,8 @@
         <th>Updated date</th>
         <th>Action</th>
     </tr>
+    </thead>
+    <tbody>
     {%if amListing %}
         {% for am in amListing %}
             <tr>
@@ -116,9 +126,16 @@
                 </td>
             </tr>
     {%endif%}
+    </tbody>
 </table>
 
 </div>
 </div>
 </div>
+
+<script>
+    // console.log("call");
+    // $('#activity-maste-table').DataTable();
+</script>
+
 {%endblock%}
